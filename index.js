@@ -45,7 +45,7 @@ var SafariBrowser = function(baseBrowserDecorator, args, logger) {
     var self = this;
 
     log.debug(url);
-    self._execCommand(self._getCommand(), self._getOptions(url));
+    // self._execCommand(self._getCommand(), self._getOptions(url));
     ping(config, 100, function() {
       self.driver = wd.remote(config, 'promiseChain');
       self.browser = self.driver.init({});
