@@ -1,5 +1,6 @@
 var wd = require('wd');
 var http = require('http');
+var url = require('url');
 
 /**
  * The `safaridriver` does not always start accepting incoming connections immediately. As a result we have to "ping"
@@ -23,14 +24,16 @@ function ping(options, limit, done) {
 var SafariBrowser = function(baseBrowserDecorator, args, logger) {
   baseBrowserDecorator(this);
 
-  this.name = 'Safari via WebDriver';
-  var log = logger.create(this.name);
-
-  var config = args.config || {
+  var config = Object.assign({
+    protocol: 'http:',
     hostname: '127.0.0.1',
     port: 4444,
     pathname: '/'
-  };
+  }, args.config);
+
+  var webDriver = url.format(config);
+  this.name = 'Safari via WebDriver at ' + webDriver;
+  var log = logger.create(this.name);
 
   this._getOptions = function() {
     return [
