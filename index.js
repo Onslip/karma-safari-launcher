@@ -3,7 +3,6 @@ var http = require('http');
 var url = require('url');
 
 /**
- * Use `async`/`await` to provide a `sleep` capability.
  *
  * @see https://stackoverflow.com/a/39914235/247730
  * @param {number} ms The time, in milliseconds, to block the event queue.
@@ -62,7 +61,7 @@ var SafariBrowser = function(baseBrowserDecorator, args, logger) {
     var attempts = 0;
     // TODO: It would be nice if this was configurable
     const MAX_ATTEMPTS = 3;
-    async function attachKarma(error) {
+    function attachKarma(error) {
       attempts += 1;
       if (error && attempts === 1) {
         log.debug(`attachKarma ${attempts} of ${MAX_ATTEMPTS}`);
@@ -75,8 +74,9 @@ var SafariBrowser = function(baseBrowserDecorator, args, logger) {
         // TODO: It would be nice if this was configurable
         const sleepDuration = 4000;
         log.debug(`Going to give the driver time to start-up. Sleeping for ${sleepDuration}ms.`);
-        await sleep(sleepDuration);
-        self.browser = self.driver.init({}, attachKarma);
+        sleep(sleepDuration).then(() => {
+          self.browser = self.driver.init({}, attachKarma);
+        });
       } else if (error) {
         log.error('Could not connect to Safari.');
       } else {
