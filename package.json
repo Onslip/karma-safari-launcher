@@ -1,6 +1,6 @@
 {
-  "name": "karma-safari-launcher",
-  "version": "1.0.0",
+  "name": "@onslip/karma-safari-launcher",
+  "version": "1.0.1",
   "description": "A Karma plugin. Launcher for Safari.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/karma-runner/karma-safari-launcher.git"
+    "url": "git://github.com:Onslip/karma-safari-launcher.git"
   },
   "keywords": [
     "karma-plugin",
